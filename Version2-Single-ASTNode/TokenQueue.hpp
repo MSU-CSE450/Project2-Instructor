@@ -1,18 +1,5 @@
 #pragma once
 
-// A dynamic token manager.
-// 
-// Example usages:
-//   TokenQueue tokens;
-//   tokens.Load(filename);          // Load a file
-//   auto token = tokens.Use();      // Get the next token and advance
-//   bool found = tokens.UseIf('$'); // Use the next token IF it is a dollar sign
-//   auto token2 = tokens.Peek();    // Get the next token _without_ advancing
-//
-//   // Use the next token; if it is NOT an IDENTIFIER token, give an error and exit!
-//   auto token3 = tokens.Use(Lexer::ID_IDENTIFIER);
-//   
-
 #include <assert.h>
 #include <vector>
 
@@ -82,26 +69,16 @@ public:
   // Get and remove the next token, give provided error if is not expected id.
   template <typename... Ts>
   const emplex::Token & Use(int id, Ts &&... message) {
-    if (!Is(id)) {
-      if constexpr (sizeof...(Ts) == 0) {
-        Error( CurLine(), "Expected token of type ", emplex::Lexer::TokenName(id),
-                          ", but found type ", emplex::Lexer::TokenName(Peek()));
-      }
-      else Error( CurLine(), std::forward<Ts>(message)...);
-    }
+    if (!Is(id)) Error( CurLine(), std::forward<Ts>(message)...);
     return Use();
   }
 
-  // If the next token is one of the provided ids, use it an return it.
-  // Otherwise, don't use it and return 0.
-  template <typename... Ts>
-  int UseIf(int id, Ts... args) {
-    if (Is(id)) { return Use(); }
-    return UseIf(args...);
+  // If the next token is the provided id, use it an return true.
+  // Otherwise, don't use it and return false.
+  bool UseIf(int id) {
+    if (Is(id)) { Use(); return true; }
+    return false;
   }
-
-  // Base case for UseIf
-  int UseIf() { return 0; }
 
   void Rewind() {
     assert(token_id > 0);
