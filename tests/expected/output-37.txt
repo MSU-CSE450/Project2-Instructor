@@ -1,0 +1,16 @@
+3 is PRIME.
+5 is PRIME.
+9 is NOT prime (9 / 3 = 3).
+17 is PRIME.
+33 is NOT prime (33 / 3 = 11).
+65 is NOT prime (65 / 5 = 13).
+129 is NOT prime (129 / 3 = 43).
+257 is PRIME.
+513 is NOT prime (513 / 3 = 171).
+1025 is NOT prime (1025 / 5 = 205).
+2049 is NOT prime (2049 / 3 = 683).
+4097 is NOT prime (4097 / 17 = 241).
+8193 is NOT prime (8193 / 3 = 2731).
+16385 is NOT prime (16385 / 5 = 3277).
+32769 is NOT prime (32769 / 3 = 10923).
+65537 is PRIME.
