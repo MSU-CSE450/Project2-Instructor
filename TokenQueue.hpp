@@ -25,7 +25,7 @@ private:
   std::vector<emplex::Token> tokens{};
   size_t token_id = 0;
 
-  static constexpr emplex::Token eof_token{0, "_EOF_", 0};
+  const emplex::Token eof_token{0, "_EOF_", 0};
 
   // == Helper functions ==
   void Cleanup() {
